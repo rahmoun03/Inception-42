@@ -1,0 +1,5 @@
+-- init.sql
+CREATE DATABASE IF NOT EXISTS wordpress;
+CREATE USER IF NOT EXISTS 'ayoub'@'%' IDENTIFIED BY 'ayoub0330';
+GRANT ALL PRIVILEGES ON wordpress.* TO 'ayoub'@'%';
+FLUSH PRIVILEGES;
