@@ -8,4 +8,6 @@ RUN apt-get update && \
 
 COPY tools/entrypoint.sh /usr/local/bin/
 
+EXPOSE 3306
+
 ENTRYPOINT ["entrypoint.sh"]

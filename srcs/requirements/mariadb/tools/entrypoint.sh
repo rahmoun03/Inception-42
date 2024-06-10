@@ -1,7 +1,7 @@
 #!/bin/bash
 service mariadb start
 
-sleep 5
+sleep 1
 
 mysql -u root -p"$MYSQL_ROOT_PASSWORD" << EOF
 
@@ -16,8 +16,8 @@ CREATE TABLE IF NOT EXISTS users (
 
 INSERT INTO users VALUES(1, "KAMAL"),(2, "LM3ALAM");
 
-CREATE USER IF NOT EXISTS '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD';
-GRANT ALL PRIVILEGES ON $MYSQL_DATABASE.* TO '$MYSQL_USER'@'%';
+CREATE USER IF NOT EXISTS '$MYSQL_USER'@'%' IDENTIFIED BY 'ayoub0330';
+GRANT ALL PRIVILEGES ON $MYSQL_DATABASE.* TO '$MYSQL_USER'@'%' IDENTIFIED BY 'ayoub0330';
 FLUSH PRIVILEGES;
 EOF
 
@@ -25,10 +25,9 @@ echo "set up user and database"
 
 service mariadb stop
 
-sleep 1
+echo "[mysqld] 
+    bind-address = 0.0.0.0" > /etc/mysql/my.cnf
 
-old="bind-address            = 127.0.0.1"
-new="bind-address            = 0.0.0.0"
-sed -i "s/$old/$new/g" /etc/mysql/mariadb.conf.d/50-server.cnf
+sleep 1
 
 mysqld_safe
