@@ -9,9 +9,11 @@ RUN mkdir -p /etc/ssl/private /etc/ssl/certs && \
 
 # RUN mkdir -p /var/www/html/wordpress
 
-COPY tools/index.php /var/www/html/wordpress/
+# COPY tools/index.php /var/www/html/wordpress/
 COPY conf/nginx.conf /etc/nginx/nginx.conf
 COPY conf/default.conf /etc/nginx/sites-enabled/default
+
+# WORKDIR /var/www/html/wordpress
 
 EXPOSE 443
 

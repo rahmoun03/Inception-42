@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install -y \
     tar \
     curl
 
+
 RUN mkdir -p /run/php
 
 RUN mkdir -p /var/www/html && \
@@ -14,12 +15,14 @@ RUN mkdir -p /var/www/html && \
     tar -xzf latest.tar.gz -C /var/www/html && \
     rm latest.tar.gz
     
-RUN chown -R www-data:www-data /var/www/html/wordpress
-# COPY tools/wp-config.php /var/www/html/wordpress/wp-config.php
+# COPY tools/index.php /var/www/html/wordpress/index.php
+COPY conf/wp-config.php /var/www/html/wordpress/
 COPY conf/www.conf /etc/php/7.4/fpm/pool.d/www.conf
-COPY tools/index.php /var/www/html/wordpress/index.php
+
+RUN chown -R www-data:www-data /var/www/html/wordpress
+RUN chmod +x /var/www/html/wordpress/*
+RUN chmod +x /var/www/html/wordpress/*/*
 
 EXPOSE 9000
 
 CMD ["php-fpm7.4", "-F"]
-
