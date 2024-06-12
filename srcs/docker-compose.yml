@@ -7,7 +7,7 @@ services:
     env_file:
       - .env
     volumes:
-      - mariadb_data:/var/lib/mysql
+      - mariadb:/var/lib/mysql
     networks:
       - ncp
     healthcheck:
@@ -25,7 +25,7 @@ services:
     depends_on:
       - mariadb
     volumes:
-      - wordpress_data:/var/www/html
+      - wordpress:/var/www/html
     networks:
       - ncp
     healthcheck:
@@ -45,13 +45,23 @@ services:
     ports:
       - "443:443"
     volumes:
-      - wordpress_data:/var/www/html
+      - wordpress:/var/www/html
     networks:
       - ncp
 
 volumes:
-  mariadb_data:
-  wordpress_data:
+  mariadb:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/arahmoun/data/mariadb
+      o: bind
+  wordpress:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/arahmoun/data/wordpress
+      o: bind
 
 networks:
   ncp:

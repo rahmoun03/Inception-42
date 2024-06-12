@@ -23,8 +23,8 @@ RUN mv wp-cli.phar /bin/wp
 COPY tools/install-wp.sh /bin/
 COPY conf/www.conf /etc/php/7.4/fpm/pool.d/www.conf
 
-EXPOSE 9000
-
 WORKDIR /var/www/html/wordpress/
+
+EXPOSE 9000
 
 CMD ["sh", "-c" , "install-wp.sh"]

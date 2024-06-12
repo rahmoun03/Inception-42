@@ -18,14 +18,13 @@ up :
 re : down all
 
 down :
-	docker compose -f srcs/docker-compose.yml down
+	docker compose -f srcs/docker-compose.yml down -v
 
 info:
 	docker ps --all
 
 clean : down 
 	docker system prune
-	docker volume rm srcs_mariadb_data  srcs_wordpress_data
 
 logs:
 	docker compose -f srcs/docker-compose.yml logs
