@@ -1,15 +1,3 @@
-NGINX = nginx
-
-MARIADB = mariadb
-
-WORDPRESS = wordpress
-
-NET = ncp
-
-VOLUME_DB = mariadb_data 
-
-VOLUME_WEB = wordpress_data
-
 all : up
 
 up :
